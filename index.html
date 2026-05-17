@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Opened Scripture — A Biblical Lens on Life</title>
+  <meta name="description" content="A weekly newsletter helping Christians view life, culture, and current events through the lens of Biblical Christianity." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --forest:       #1B3D2F;
+      --forest-deep:  #102518;
+      --forest-mid:   #244D3A;
+      --forest-light: #2E6048;
+      --gold:         #C9A84C;
+      --gold-light:   #E8C87A;
+      --gold-pale:    #F5EDD4;
+      --cream:        #FAF7F0;
+      --cream-warm:   #F2EBD9;
+      --muted:        #6B7B72;
+      --border:       #C8D6CE;
+      --text:         #1A2E24;
+      --white:        #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--forest-deep);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(16,37,24,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold-light); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+
+    .nav-cta {
+      background: transparent;
+      border: 1px solid rgba(201,168,76,0.5);
+      color: var(--gold-light) !important;
+      padding: 7px 18px;
+      border-radius: 3px;
+    }
+    .nav-cta:hover { background: rgba(201,168,76,0.1) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--forest-deep);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(27,61,47,0.9) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(201,168,76,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 20% 60%, rgba(27,61,47,0.5) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 740px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--gold-light);
+      opacity: 0.8;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .hero-cross {
+      font-size: 28px;
+      color: var(--gold);
+      opacity: 0.6;
+      display: block;
+      margin-bottom: 16px;
+      animation: fadeUp 1s ease both;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(42px, 8vw, 76px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.05;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+      animation: fadeUp 1s 0.1s ease both;
+    }
+
+    .hero-title span {
+      color: var(--gold-light);
+      display: block;
+    }
+
+    .hero-tagline {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: clamp(17px, 2.5vw, 22px);
+      color: rgba(255,255,255,0.55);
+      margin: 18px 0 10px;
+      animation: fadeUp 1s 0.2s ease both;
+    }
+
+    .gold-rule {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+      margin: 22px auto;
+      animation: fadeUp 1s 0.3s ease both;
+    }
+    .gold-rule::before, .gold-rule::after {
+      content: '';
+      flex: 1;
+      max-width: 100px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.4;
+    }
+    .gold-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; opacity: 0.7; }
+
+    .hero-verse {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 40px;
+      animation: fadeUp 1s 0.35s ease both;
+    }
+
+    /* ── SUBSCRIBE FORM (hero) ── */
+    .subscribe-form {
+      display: flex;
+      gap: 0;
+      max-width: 480px;
+      margin: 0 auto 18px;
+      animation: fadeUp 1s 0.45s ease both;
+    }
+
+    .subscribe-form input[type="email"] {
+      flex: 1;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(201,168,76,0.35);
+      border-right: none;
+      color: var(--white);
+      font-family: 'EB Garamond', serif;
+      font-size: 15px;
+      padding: 14px 20px;
+      border-radius: 4px 0 0 4px;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .subscribe-form input[type="email"]::placeholder { color: rgba(255,255,255,0.3); }
+    .subscribe-form input[type="email"]:focus {
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.09);
+    }
+
+    .subscribe-form button {
+      background: var(--gold);
+      color: var(--forest-deep);
+      border: none;
+      font-family: 'Cinzel', serif;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 14px 24px;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .subscribe-form button:hover { background: var(--gold-light); }
+
+    .hero-disclaimer {
+      font-size: 11px;
+      color: rgba(255,255,255,0.28);
+      animation: fadeUp 1s 0.5s ease both;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      margin-top: 48px;
+      animation: fadeUp 1s 0.55s ease both;
+    }
+
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--gold-light);
+      display: block;
+    }
+    .stat-label {
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── ABOUT STRIP ── */
+    .about-strip {
+      background: var(--forest);
+      border-top: 1px solid rgba(201,168,76,0.2);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      padding: 64px 40px;
+    }
+
+    .about-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-text .section-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--gold-light);
+      opacity: 0.7;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .about-text h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .about-text p {
+      font-family: 'EB Garamond', serif;
+      font-size: 16px;
+      color: rgba(255,255,255,0.62);
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+
+    .pillars-list {
+      list-style: none;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .pillars-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'EB Garamond', serif;
+      font-size: 15px;
+      color: rgba(255,255,255,0.7);
+    }
+    .pillars-list li::before {
+      content: '✦';
+      color: var(--gold);
+      font-size: 10px;
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+
+    .about-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 8px;
+      padding: 32px 28px;
+    }
+
+    .about-card-verse {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 19px;
+      color: var(--gold-pale);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .about-card-ref {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--gold-light);
+      opacity: 0.7;
+    }
+
+    .about-card-divider {
+      height: 1px;
+      background: rgba(201,168,76,0.2);
+      margin: 20px 0;
+    }
+
+    .about-card-desc {
+      font-family: 'EB Garamond', serif;
+      font-size: 14.5px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.65;
+    }
+
+    /* ── TOPICS SECTION ── */
+    .topics-section {
+      background: var(--forest-deep);
+      padding: 80px 40px;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 50px;
+    }
+
+    .section-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--gold-light);
+      opacity: 0.7;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      display: block;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .section-body {
+      font-family: 'EB Garamond', serif;
+      font-size: 16px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+    }
+
+    .topics-grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .topic-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 8px;
+      padding: 28px 22px;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .topic-card:hover {
+      background: rgba(201,168,76,0.06);
+      border-color: rgba(201,168,76,0.35);
+      transform: translateY(-3px);
+    }
+
+    .topic-icon { font-size: 26px; display: block; margin-bottom: 12px; }
+
+    .topic-title {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      color: var(--gold-light);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .topic-desc {
+      font-family: 'EB Garamond', serif;
+      font-size: 14px;
+      color: rgba(255,255,255,0.48);
+      line-height: 1.6;
+    }
+
+    /* ── SAMPLE ISSUE ── */
+    .sample-section {
+      background: var(--forest);
+      padding: 80px 40px;
+      border-top: 1px solid rgba(201,168,76,0.15);
+    }
+
+    .sample-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .sample-articles {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: rgba(201,168,76,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 40px;
+    }
+
+    .sample-article {
+      background: rgba(16,37,24,0.85);
+      padding: 22px 26px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      transition: background 0.2s;
+    }
+    .sample-article:hover { background: rgba(27,61,47,0.95); }
+
+    .sa-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: rgba(201,168,76,0.15);
+      line-height: 1;
+      min-width: 32px;
+    }
+
+    .sa-tag {
+      display: inline-block;
+      background: rgba(201,168,76,0.1);
+      color: var(--gold-light);
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 2px 10px;
+      border-radius: 20px;
+      margin-bottom: 5px;
+      border: 0.5px solid rgba(201,168,76,0.25);
+      font-family: 'Cinzel', serif;
+    }
+
+    .sa-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .sa-verse {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: rgba(201,168,76,0.6);
+      border-left: 2px solid rgba(201,168,76,0.3);
+      padding-left: 10px;
+      margin-top: 6px;
+    }
+
+    /* ── SUBSCRIBE SECTION ── */
+    .subscribe-section {
+      background: var(--forest-deep);
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .subscribe-box {
+      max-width: 560px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 10px;
+      padding: 48px 40px;
+    }
+
+    .subscribe-box .hero-cross {
+      font-size: 22px;
+      margin-bottom: 12px;
+      animation: none;
+    }
+
+    .subscribe-box h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .subscribe-box p {
+      font-family: 'EB Garamond', serif;
+      font-size: 16px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+
+    .sub-form-full {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .sub-form-full input {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--white);
+      font-family: 'EB Garamond', serif;
+      font-size: 15px;
+      padding: 13px 18px;
+      border-radius: 4px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .sub-form-full input::placeholder { color: rgba(255,255,255,0.28); }
+    .sub-form-full input:focus { border-color: var(--gold); }
+
+    .sub-form-full button {
+      background: var(--gold);
+      color: var(--forest-deep);
+      border: none;
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .sub-form-full button:hover { background: var(--gold-light); }
+
+    .sub-note {
+      margin-top: 14px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* success state */
+    .sub-success {
+      display: none;
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 6px;
+      padding: 20px;
+      text-align: center;
+    }
+    .sub-success p {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 17px;
+      color: var(--gold-pale);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ── NEWSLETTER PLATFORM SECTION ── */
+    .platform-section {
+      background: var(--forest);
+      padding: 80px 40px;
+      border-top: 1px solid rgba(201,168,76,0.15);
+    }
+
+    .platform-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .platform-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .platform-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 8px;
+      padding: 28px;
+    }
+
+    .platform-card.recommended {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.05);
+    }
+
+    .rec-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--forest-deep);
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .platform-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .platform-url {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: var(--gold-light);
+      opacity: 0.6;
+      margin-bottom: 14px;
+    }
+
+    .platform-desc {
+      font-family: 'EB Garamond', serif;
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .platform-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .platform-features li {
+      font-family: 'EB Garamond', serif;
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .platform-features li::before {
+      content: '✓';
+      color: var(--gold);
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--forest-deep);
+      border-top: 1px solid rgba(201,168,76,0.2);
+      padding: 48px 40px 32px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 3px;
+      margin-bottom: 6px;
+    }
+    .footer-logo span { color: var(--gold-light); }
+
+    .footer-tagline {
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .footer-links a {
+      font-family: 'Cinzel', serif;
+      font-size: 9.5px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      padding: 6px 14px;
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 3px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold-light); border-color: rgba(201,168,76,0.4); }
+
+    .footer-fine {
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+      font-family: 'EB Garamond', serif;
+      line-height: 1.8;
+    }
+    .footer-fine a { color: rgba(255,255,255,0.35); text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero-stats { gap: 24px; flex-wrap: wrap; }
+      .about-inner, .platform-grid { grid-template-columns: 1fr; gap: 32px; }
+      .topics-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-strip, .topics-section, .sample-section,
+      .subscribe-section, .platform-section { padding: 60px 24px; }
+      footer { padding: 40px 24px 28px; }
+    }
+
+    @media (max-width: 480px) {
+      .topics-grid { grid-template-columns: 1fr 1fr; }
+      .subscribe-form { flex-direction: column; }
+      .subscribe-form input[type="email"] { border-right: 1px solid rgba(201,168,76,0.35); border-radius: 4px; }
+      .subscribe-form button { border-radius: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">OPENED <span>SCRIPTURE</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#topics">Topics</a></li>
+    <li><a href="#issues">Issues</a></li>
+    <li><a href="#subscribe" class="nav-cta">Subscribe Free</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <span class="hero-cross">✝</span>
+    <p class="hero-eyebrow">A Weekly Newsletter</p>
+    <h1 class="hero-title">OPENED<span>SCRIPTURE</span></h1>
+    <p class="hero-tagline">Viewing life through the lens of Biblical Christianity</p>
+    <div class="gold-rule"><div class="gold-dot"></div></div>
+    <p class="hero-verse">"Your word is a lamp to my feet and a light to my path." — Psalm 119:105</p>
+
+    <form class="subscribe-form" onsubmit="handleHeroSubscribe(event)">
+      <input type="email" id="hero-email" placeholder="Enter your email address" required />
+      <button type="submit">Subscribe Free</button>
+    </form>
+    <p class="hero-disclaimer">Free forever. No spam. Unsubscribe any time.</p>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">Weekly</span>
+        <span class="stat-label">Every Tuesday</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Scripture-Rooted</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">Free</span>
+        <span class="stat-label">Always</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-strip" id="about">
+  <div class="about-inner">
+    <div class="about-text">
+      <p class="section-eyebrow">Our Mission</p>
+      <h2>Every issue anchored in God's Word</h2>
+      <p>Opened Scripture exists to help believers think Biblically — not just on Sunday, but every day of the week. We bring theology out of the classroom and into the kitchen table, the office, the ballot box, and the living room.</p>
+      <p>Each issue takes on real-life topics — culture, family, work, politics, anxiety, relationships — and filters them through the unchanging truth of Scripture.</p>
+      <ul class="pillars-list">
+        <li>Scripture-rooted, not opinion-driven</li>
+        <li>Gospel-centered in every issue</li>
+        <li>Doctrinally sound and practical</li>
+        <li>Written for real life, not just Sunday</li>
+        <li>Free to all believers, always</li>
+      </ul>
+    </div>
+    <div class="about-card">
+      <div class="about-card-verse">"All Scripture is breathed out by God and profitable for teaching, for reproof, for correction, and for training in righteousness."</div>
+      <div class="about-card-ref">2 Timothy 3:16</div>
+      <div class="about-card-divider"></div>
+      <div class="about-card-desc">We believe the Bible is not a collection of ancient wisdom — it is the living Word of God, sufficient for every situation, culture, and century. Opened Scripture helps you apply it daily.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TOPICS -->
+<section class="topics-section" id="topics">
+  <div class="section-header">
+    <span class="section-eyebrow">What We Cover</span>
+    <h2 class="section-title">Every area of life, seen through Scripture</h2>
+    <p class="section-body">The Bible speaks to all of life — not just Sunday morning. Each week we tackle one or more of these areas with depth, clarity, and Biblical conviction.</p>
+  </div>
+  <div class="topics-grid">
+    <div class="topic-card">
+      <span class="topic-icon">✝️</span>
+      <div class="topic-title">Theology &amp; Doctrine</div>
+      <div class="topic-desc">Core truths of the Christian faith explained clearly and applied to daily life.</div>
+    </div>
+    <div class="topic-card">
+      <span class="topic-icon">👨‍👩‍👧</span>
+      <div class="topic-title">Marriage &amp; Family</div>
+      <div class="topic-desc">Building Biblical homes in a culture that opposes God's design for family.</div>
+    </div>
+    <div class="topic-card">
+      <span class="topic-icon">🌍</span>
+      <div class="topic-title">Culture &amp; Society</div>
+      <div class="topic-desc">A Biblical lens on cultural shifts, media, entertainment, and modern trends.</div>
+    </div>
+    <div class="topic-card">
+      <span class="topic-icon">🏛️</span>
+      <div class="topic-title">Politics &amp; Civics</div>
+      <div class="topic-desc">How a Christian should think about government, law, and civic responsibility.</div>
+    </div>
+    <div class="topic-card">
+      <span class="topic-icon">💼</span>
+      <div class="topic-title">Work &amp; Vocation</div>
+      <div class="topic-desc">The theology of work, calling, and using your vocation as a form of worship.</div>
+    </div>
+    <div class="topic-card">
+      <span class="topic-icon">📖</span>
+      <div class="topic-title">Bible Study Helps</div>
+      <div class="topic-desc">Tools, reading plans, and frameworks to help you study Scripture on your own.</div>
+    </div>
+    <div class="topic-card">
+      <span class="topic-icon">🙏</span>
+      <div class="topic-title">Prayer &amp; Devotion</div>
+      <div class="topic-desc">Practical guidance for building a deep, consistent prayer and devotional life.</div>
+    </div>
+    <div class="topic-card">
+      <span class="topic-icon">🧠</span>
+      <div class="topic-title">Mental Health &amp; Anxiety</div>
+      <div class="topic-desc">What God's Word actually says about fear, worry, depression, and peace of mind.</div>
+    </div>
+    <div class="topic-card">
+      <span class="topic-icon">⚓</span>
+      <div class="topic-title">Apologetics</div>
+      <div class="topic-desc">How to defend your faith and engage skeptics with gentleness and confidence.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLE ISSUE -->
+<section class="sample-section" id="issues">
+  <div class="sample-inner">
+    <div class="section-header" style="text-align:left; margin-bottom:0;">
+      <span class="section-eyebrow">Sample Issue</span>
+      <h2 class="section-title">What to expect each week</h2>
+    </div>
+    <div class="sample-articles">
+      <div class="sample-article">
+        <div class="sa-num">1</div>
+        <div>
+          <span class="sa-tag">Culture &amp; Faith</span>
+          <div class="sa-title">When the World Calls Evil Good — A Biblical Response</div>
+          <div class="sa-verse">"Woe to those who call evil good and good evil." — Isaiah 5:20</div>
+        </div>
+      </div>
+      <div class="sample-article">
+        <div class="sa-num">2</div>
+        <div>
+          <span class="sa-tag">Deep Dive</span>
+          <div class="sa-title">Anxiety, Fear &amp; the Sovereignty of God: What the Bible Actually Says</div>
+          <div class="sa-verse">"Do not be anxious about anything..." — Philippians 4:6–7</div>
+        </div>
+      </div>
+      <div class="sample-article">
+        <div class="sa-num">3</div>
+        <div>
+          <span class="sa-tag">Marriage &amp; Family</span>
+          <div class="sa-title">Building Your Home on the Rock: Discipleship Starts at Your Table</div>
+          <div class="sa-verse">"Teach them diligently to your children..." — Deuteronomy 6:7</div>
+        </div>
+      </div>
+      <div class="sample-article">
+        <div class="sa-num">4</div>
+        <div>
+          <span class="sa-tag">Practical Discipleship</span>
+          <div class="sa-title">ACTS: A Prayer Framework That Will Transform How You Pray</div>
+          <div class="sa-verse">"Pray then like this: Our Father in heaven..." — Matthew 6:9</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBSCRIBE -->
+<section class="subscribe-section" id="subscribe">
+  <div class="subscribe-box">
+    <div class="hero-cross">✝</div>
+    <h2>Join Opened Scripture</h2>
+    <p>Every Tuesday, a fresh issue lands in your inbox — helping you see life, culture, and current events through the lens of God's Word. Free, always.</p>
+
+    <div id="sub-form-wrap">
+      <form class="sub-form-full" onsubmit="handleSubscribe(event)">
+        <input type="text" id="sub-name" placeholder="Your first name" required />
+        <input type="email" id="sub-email" placeholder="Your email address" required />
+        <button type="submit">Subscribe to Opened Scripture — Free</button>
+      </form>
+      <p class="sub-note">No spam. No sales. Just Scripture. Unsubscribe any time.</p>
+    </div>
+
+    <div class="sub-success" id="sub-success">
+      <p>✦ &nbsp; "He opened their minds to understand the Scriptures." — Luke 24:45<br><br>
+      You're subscribed! Your first issue arrives Tuesday.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM SECTION -->
+<section class="platform-section" id="platform">
+  <div class="platform-inner">
+    <div class="section-header" style="text-align:left; margin-left:0; max-width:100%;">
+      <span class="section-eyebrow">Write &amp; Send Your Newsletter</span>
+      <h2 class="section-title">Best free platforms to create &amp; send</h2>
+    </div>
+    <div class="platform-grid">
+      <div class="platform-card recommended">
+        <span class="rec-badge">✦ Recommended</span>
+        <div class="platform-name">Beehiiv</div>
+        <div class="platform-url">beehiiv.com</div>
+        <div class="platform-desc">Built specifically for newsletters. The cleanest writing editor, best subscriber management, and most generous free tier available today.</div>
+        <ul class="platform-features">
+          <li>Free up to 2,500 subscribers</li>
+          <li>Beautiful, distraction-free writing editor</li>
+          <li>Paste custom HTML for your template</li>
+          <li>Built-in subscriber analytics</li>
+          <li>Simple publish + send workflow</li>
+          <li>Archive page for past issues</li>
+        </ul>
+      </div>
+      <div class="platform-card">
+        <div class="platform-name">Mailchimp</div>
+        <div class="platform-url">mailchimp.com</div>
+        <div class="platform-desc">The most widely-used email platform. Solid free tier and good HTML editor support for pasting your custom template.</div>
+        <ul class="platform-features">
+          <li>Free up to 500 contacts</li>
+          <li>"Code your own" HTML template option</li>
+          <li>Drag-and-drop editor also available</li>
+          <li>Strong delivery and open-rate tracking</li>
+          <li>Audience segmentation tools</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">OPENED <span>SCRIPTURE</span></div>
+  <div class="footer-tagline">"All Scripture is breathed out by God." — 2 Timothy 3:16</div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#topics">Topics</a>
+    <a href="#issues">Issues</a>
+    <a href="#subscribe">Subscribe</a>
+    <a href="newsletter.html">Write Issue</a>
+  </div>
+  <div class="footer-fine">
+    © 2026 Opened Scripture &nbsp;·&nbsp; All rights reserved<br>
+    <a href="#">Unsubscribe</a> &nbsp;·&nbsp; <a href="#">Privacy</a>
+  </div>
+</footer>
+
+<script>
+  function handleHeroSubscribe(e) {
+    e.preventDefault();
+    const email = document.getElementById('hero-email').value;
+    if (email) {
+      alert('Thank you! You\'re subscribed. Your first issue arrives Tuesday. \n\n(Note: Connect this form to Beehiiv or Mailchimp to collect real subscribers.)');
+      e.target.reset();
+    }
+  }
+
+  function handleSubscribe(e) {
+    e.preventDefault();
+    const name = document.getElementById('sub-name').value;
+    const email = document.getElementById('sub-email').value;
+    if (name && email) {
+      document.getElementById('sub-form-wrap').style.display = 'none';
+      document.getElementById('sub-success').style.display = 'block';
+    }
+  }
+</script>
+
+</body>
+</html>

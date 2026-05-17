@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Write Issue — Opened Scripture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --forest:       #1B3D2F;
+      --forest-deep:  #102518;
+      --forest-mid:   #244D3A;
+      --forest-light: #2E6048;
+      --gold:         #C9A84C;
+      --gold-light:   #E8C87A;
+      --gold-pale:    #F5EDD4;
+      --cream:        #FAF7F0;
+      --cream-warm:   #F2EBD9;
+      --muted:        #6B7B72;
+      --border:       #C8D6CE;
+      --text:         #1A2E24;
+      --white:        #ffffff;
+      --sidebar-w:    320px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #0E2018;
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 58px;
+      background: rgba(16,37,24,0.97);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 200;
+      gap: 16px;
+    }
+
+    .topbar-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+    .topbar-logo span { color: var(--gold-light); }
+
+    .topbar-title {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+    }
+
+    .topbar-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(201,168,76,0.35);
+      color: rgba(255,255,255,0.7);
+      font-family: 'Cinzel', serif;
+      font-size: 9.5px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 7px 16px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold-light); }
+
+    .btn-gold {
+      background: var(--gold);
+      border: none;
+      color: var(--forest-deep);
+      font-family: 'Cinzel', serif;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 8px 18px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-gold:hover { background: var(--gold-light); }
+
+    /* ── LAYOUT ── */
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      min-height: 100vh;
+      padding-top: 58px;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      background: var(--forest-deep);
+      border-right: 1px solid rgba(201,168,76,0.15);
+      padding: 24px 20px;
+      overflow-y: auto;
+      max-height: calc(100vh - 58px);
+      position: sticky;
+      top: 58px;
+    }
+
+    .sidebar-section {
+      margin-bottom: 28px;
+    }
+
+    .sidebar-label {
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      color: var(--gold-light);
+      opacity: 0.6;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 5px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: var(--white);
+      font-family: 'EB Garamond', serif;
+      font-size: 14px;
+      padding: 9px 12px;
+      border-radius: 4px;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: vertical;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,0.22); }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--gold); }
+    .form-group select option { background: var(--forest-deep); color: var(--white); }
+
+    /* Article blocks in sidebar */
+    .article-block {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 6px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .article-block-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .article-block-num {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: var(--gold-light);
+      opacity: 0.7;
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.25);
+      cursor: pointer;
+      font-size: 14px;
+      padding: 0;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .remove-btn:hover { color: #e07070; }
+
+    .add-article-btn {
+      width: 100%;
+      background: transparent;
+      border: 1px dashed rgba(201,168,76,0.25);
+      color: rgba(255,255,255,0.35);
+      font-family: 'Cinzel', serif;
+      font-size: 9.5px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 4px;
+    }
+    .add-article-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+
+    /* ── PREVIEW PANEL ── */
+    .preview-panel {
+      background: #EDEBE8;
+      padding: 32px 24px 64px;
+      overflow-y: auto;
+    }
+
+    .preview-label {
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      letter-spacing: 3px;
+      color: var(--muted);
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* ── NEWSLETTER PREVIEW ── */
+    #preview-output {
+      max-width: 600px;
+      margin: 0 auto;
+      font-family: 'EB Garamond', serif;
+    }
+
+    /* ── COPY HTML MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 300;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--forest-deep);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 10px;
+      padding: 28px;
+      max-width: 680px;
+      width: 90%;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .modal-title {
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: var(--white);
+    }
+
+    .modal textarea {
+      flex: 1;
+      min-height: 320px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: rgba(255,255,255,0.8);
+      font-family: monospace;
+      font-size: 11px;
+      padding: 14px;
+      border-radius: 4px;
+      resize: vertical;
+      outline: none;
+      line-height: 1.5;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .modal-note {
+      font-family: 'EB Garamond', serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-logo">OPENED <span>SCRIPTURE</span></div>
+  <div class="topbar-title">Newsletter Editor</div>
+  <div class="topbar-actions">
+    <button class="btn-outline" onclick="copyHTML()">Copy HTML</button>
+    <button class="btn-gold" onclick="generatePreview()">Update Preview</button>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR: FORM -->
+  <aside class="sidebar" id="editor-sidebar">
+
+    <!-- Issue Info -->
+    <div class="sidebar-section">
+      <span class="sidebar-label">Issue Details</span>
+      <div class="form-group">
+        <label>Issue Number</label>
+        <input type="text" id="issue-num" placeholder="e.g. 13" />
+      </div>
+      <div class="form-group">
+        <label>Issue Date</label>
+        <input type="text" id="issue-date" placeholder="e.g. May 6, 2026" />
+      </div>
+      <div class="form-group">
+        <label>Opening Verse</label>
+        <textarea id="opening-verse" rows="2" placeholder="e.g. Your word is a lamp to my feet..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Verse Reference</label>
+        <input type="text" id="verse-ref" placeholder="e.g. Psalm 119:105" />
+      </div>
+    </div>
+
+    <!-- Deep Dive -->
+    <div class="sidebar-section">
+      <span class="sidebar-label">Scripture Lens — Deep Dive</span>
+      <div class="form-group">
+        <label>Deep Dive Title</label>
+        <input type="text" id="dive-title" placeholder="Title of your feature piece" />
+      </div>
+      <div class="form-group">
+        <label>Body Text</label>
+        <textarea id="dive-body" rows="5" placeholder="Write your deep dive here..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Key Verse (text)</label>
+        <textarea id="dive-verse" rows="2" placeholder="The featured verse text..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Verse Reference</label>
+        <input type="text" id="dive-ref" placeholder="e.g. Philippians 4:6–7" />
+      </div>
+    </div>
+
+    <!-- Articles -->
+    <div class="sidebar-section">
+      <span class="sidebar-label">Articles</span>
+      <div id="articles-container">
+        <!-- Articles inserted by JS -->
+      </div>
+      <button class="add-article-btn" onclick="addArticle()">+ Add Article</button>
+    </div>
+
+    <!-- Footer note -->
+    <div class="sidebar-section">
+      <span class="sidebar-label">Closing Note</span>
+      <div class="form-group">
+        <label>Sign-off / Closing Thought</label>
+        <textarea id="closing-note" rows="3" placeholder="A closing encouragement or call to action..."></textarea>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- PREVIEW PANEL -->
+  <main class="preview-panel">
+    <p class="preview-label">✦ &nbsp; Live Preview &nbsp; ✦</p>
+    <div id="preview-output">
+      <!-- Preview rendered here -->
+    </div>
+  </main>
+
+</div>
+
+<!-- COPY HTML MODAL -->
+<div class="modal-overlay" id="html-modal">
+  <div class="modal">
+    <div class="modal-title">✦ &nbsp; Copy Newsletter HTML</div>
+    <p class="modal-note">Copy everything below and paste it into Beehiiv (New Post → Custom HTML block) or Mailchimp (Code your own template). This is your complete, ready-to-send email.</p>
+    <textarea id="html-output" readonly></textarea>
+    <div class="modal-actions">
+      <button class="btn-outline" onclick="closeModal()">Close</button>
+      <button class="btn-gold" onclick="doCopy()">Copy to Clipboard</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ── STATE ── */
+  let articleCount = 0;
+  const articles = [];
+
+  /* ── INIT: add 3 default articles ── */
+  window.onload = () => {
+    addArticle();
+    addArticle();
+    addArticle();
+    generatePreview();
+  };
+
+  function addArticle() {
+    articleCount++;
+    const id = articleCount;
+    articles.push(id);
+
+    const container = document.getElementById('articles-container');
+    const block = document.createElement('div');
+    block.className = 'article-block';
+    block.id = 'article-block-' + id;
+    block.innerHTML = `
+      <div class="article-block-header">
+        <span class="article-block-num">Article ${id}</span>
+        <button class="remove-btn" onclick="removeArticle(${id})" title="Remove">✕</button>
+      </div>
+      <div class="form-group">
+        <label>Category Tag</label>
+        <select id="art-tag-${id}">
+          <option>Culture &amp; Faith</option>
+          <option>Theology &amp; Doctrine</option>
+          <option>Marriage &amp; Family</option>
+          <option>Work &amp; Vocation</option>
+          <option>Prayer</option>
+          <option>Bible Study</option>
+          <option>Apologetics</option>
+          <option>Politics &amp; Civics</option>
+          <option>Mental Health</option>
+          <option>Practical Discipleship</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Article Title</label>
+        <input type="text" id="art-title-${id}" placeholder="Title of this article" />
+      </div>
+      <div class="form-group">
+        <label>Body Text</label>
+        <textarea id="art-body-${id}" rows="4" placeholder="Write the article body here..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Supporting Verse (optional)</label>
+        <input type="text" id="art-verse-${id}" placeholder="e.g. "Do not fear..." — Isaiah 41:10" />
+      </div>
+    `;
+    container.appendChild(block);
+  }
+
+  function removeArticle(id) {
+    const el = document.getElementById('article-block-' + id);
+    if (el) el.remove();
+    const i = articles.indexOf(id);
+    if (i > -1) articles.splice(i, 1);
+  }
+
+  function val(id) {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+
+  function generatePreview() {
+    const issueNum = val('issue-num') || '1';
+    const issueDate = val('issue-date') || 'May 2026';
+    const openVerse = val('opening-verse') || 'Your word is a lamp to my feet and a light to my path.';
+    const verseRef = val('verse-ref') || 'Psalm 119:105';
+    const diveTitle = val('dive-title') || 'This Week\'s Scripture Lens';
+    const diveBody = val('dive-body') || 'Write your deep dive content in the editor on the left.';
+    const diveVerse = val('dive-verse') || '';
+    const diveRef = val('dive-ref') || '';
+    const closing = val('closing-note') || '';
+
+    // Build articles HTML
+    let articlesHTML = '';
+    let artNum = 1;
+    const allBlocks = document.querySelectorAll('.article-block');
+    allBlocks.forEach(block => {
+      const id = block.id.replace('article-block-', '');
+      const tag = val('art-tag-' + id);
+      const title = val('art-title-' + id);
+      const body = val('art-body-' + id);
+      const verse = val('art-verse-' + id);
+      if (!title && !body) return;
+      articlesHTML += `
+        <div style="display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-bottom:0.5px solid #C8D6CE;">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;color:rgba(27,61,47,0.1);line-height:1;min-width:34px;text-align:center;">${artNum}</div>
+          <div>
+            <span style="display:inline-block;background:rgba(27,61,47,0.08);color:#2E6048;font-size:10px;font-weight:600;letter-spacing:0.5px;padding:2px 10px;border-radius:20px;margin-bottom:5px;border:0.5px solid rgba(27,61,47,0.2);font-family:'DM Sans',sans-serif;">${tag || 'Uncategorized'}</span>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:#102518;margin-bottom:5px;line-height:1.3;">${title || '(Article title)'}</div>
+            <div style="font-family:'EB Garamond',serif;font-size:15px;color:#4A5E55;line-height:1.65;">${body || ''}</div>
+            ${verse ? `<div style="margin-top:8px;font-family:'EB Garamond',serif;font-style:italic;font-size:13px;color:#2E6048;border-left:2px solid #C9A84C;padding-left:10px;opacity:0.85;">${verse}</div>` : ''}
+          </div>
+        </div>`;
+      artNum++;
+    });
+
+    const html = buildEmailHTML({ issueNum, issueDate, openVerse, verseRef, diveTitle, diveBody, diveVerse, diveRef, articlesHTML, closing });
+    document.getElementById('preview-output').innerHTML = html;
+  }
+
+  function buildEmailHTML({ issueNum, issueDate, openVerse, verseRef, diveTitle, diveBody, diveVerse, diveRef, articlesHTML, closing }) {
+    return `
+<div style="max-width:600px;margin:0 auto;font-family:'DM Sans',sans-serif;">
+
+  <!-- TOP BAR -->
+  <div style="background:#102518;color:#E8C87A;text-align:center;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:9px 20px;border-radius:12px 12px 0 0;border-bottom:1px solid #C9A84C;font-family:'Cinzel',serif;">
+    ✦ &nbsp; Viewing Life Through the Lens of Biblical Christianity &nbsp; ✦
+  </div>
+
+  <!-- HERO -->
+  <div style="background:#1B3D2F;padding:44px 32px 36px;text-align:center;border-left:1px solid rgba(201,168,76,0.25);border-right:1px solid rgba(201,168,76,0.25);">
+    <div style="color:#C9A84C;font-size:13px;letter-spacing:6px;margin-bottom:14px;opacity:0.7;">✦ &nbsp; ✦ &nbsp; ✦</div>
+    <div style="font-family:'Cinzel',serif;font-size:50px;font-weight:700;color:#ffffff;line-height:1;letter-spacing:3px;">OPENED</div>
+    <div style="font-family:'Cinzel',serif;font-size:50px;font-weight:700;color:#E8C87A;line-height:1;letter-spacing:3px;">SCRIPTURE</div>
+    <div style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:4px;color:rgba(255,255,255,0.4);margin-top:8px;">A Weekly Newsletter for the Biblical Mind</div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin:18px auto;">
+      <div style="flex:1;max-width:80px;height:1px;background:#C9A84C;opacity:0.4;"></div>
+      <div style="width:5px;height:5px;background:#C9A84C;border-radius:50%;opacity:0.7;"></div>
+      <div style="flex:1;max-width:80px;height:1px;background:#C9A84C;opacity:0.4;"></div>
+    </div>
+    <div style="font-family:'EB Garamond',serif;font-style:italic;font-size:15px;color:rgba(255,255,255,0.55);max-width:380px;margin:0 auto 12px;line-height:1.6;">"${openVerse}"</div>
+    <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:#E8C87A;opacity:0.8;">${verseRef}</div>
+    <div style="margin-top:16px;font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:0.5px;">${issueDate} &nbsp;·&nbsp; Issue No. ${issueNum}</div>
+  </div>
+
+  <!-- ARTICLES -->
+  <div style="background:#FAF7F0;padding:4px 26px 8px;border-left:1px solid #C8D6CE;border-right:1px solid #C8D6CE;">
+    <div style="background:#102518;color:#E8C87A;font-family:'Cinzel',serif;font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;padding:9px 0;margin:0 -26px 4px;padding-left:26px;">✦ &nbsp; This Week's Articles</div>
+    ${articlesHTML || '<div style="padding:20px 0;color:#6B7B72;font-family:\'EB Garamond\',serif;font-size:15px;">Add articles in the editor to see them here.</div>'}
+  </div>
+
+  <!-- DEEP DIVE -->
+  <div style="background:#102518;padding:30px 28px;border-left:1px solid rgba(201,168,76,0.25);border-right:1px solid rgba(201,168,76,0.25);position:relative;">
+    <div style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:#E8C87A;margin-bottom:14px;opacity:0.8;">✦ &nbsp; SCRIPTURE LENS — DEEP DIVE</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#ffffff;line-height:1.3;margin-bottom:12px;">${diveTitle}</div>
+    <div style="font-family:'EB Garamond',serif;font-size:15.5px;color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:${diveVerse ? '16px' : '0'};">${diveBody}</div>
+    ${diveVerse ? `
+    <div style="background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.3);border-radius:8px;padding:14px 16px;">
+      <div style="font-family:'EB Garamond',serif;font-style:italic;font-size:15px;color:#F5EDD4;line-height:1.6;margin-bottom:6px;">"${diveVerse}"</div>
+      <div style="font-family:'Cinzel',serif;font-size:10px;letter-spacing:1.5px;color:#E8C87A;opacity:0.75;">${diveRef}</div>
+    </div>` : ''}
+  </div>
+
+  ${closing ? `
+  <!-- CLOSING NOTE -->
+  <div style="background:#F5EDD4;padding:24px 28px;border-left:1px solid #C8D6CE;border-right:1px solid #C8D6CE;border-top:2px solid #C9A84C;border-bottom:2px solid #C9A84C;text-align:center;">
+    <div style="font-family:'EB Garamond',serif;font-style:italic;font-size:16px;color:#3D0D17;line-height:1.65;">${closing}</div>
+  </div>` : ''}
+
+  <!-- PILLARS -->
+  <div style="background:#F2EBD9;padding:22px 24px;border-left:1px solid #C8D6CE;border-right:1px solid #C8D6CE;display:flex;justify-content:center;gap:0;text-align:center;">
+    <div style="flex:1;padding:0 12px;border-right:1px solid #C8D6CE;">
+      <div style="font-size:22px;margin-bottom:6px;">📖</div>
+      <div style="font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:1px;color:#244D3A;text-transform:uppercase;">Scripture-<br>Rooted</div>
+    </div>
+    <div style="flex:1;padding:0 12px;border-right:1px solid #C8D6CE;">
+      <div style="font-size:22px;margin-bottom:6px;">🕊️</div>
+      <div style="font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:1px;color:#244D3A;text-transform:uppercase;">Gospel-<br>Centered</div>
+    </div>
+    <div style="flex:1;padding:0 12px;border-right:1px solid #C8D6CE;">
+      <div style="font-size:22px;margin-bottom:6px;">⚓</div>
+      <div style="font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:1px;color:#244D3A;text-transform:uppercase;">Doctrinally<br>Sound</div>
+    </div>
+    <div style="flex:1;padding:0 12px;">
+      <div style="font-size:22px;margin-bottom:6px;">🌿</div>
+      <div style="font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:1px;color:#244D3A;text-transform:uppercase;">Practically<br>Applied</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="background:#102518;padding:28px 24px 24px;text-align:center;border-radius:0 0 12px 12px;border:1px solid rgba(201,168,76,0.15);border-top:2px solid rgba(201,168,76,0.3);">
+    <div style="color:#C9A84C;font-size:20px;opacity:0.6;margin-bottom:12px;">✝</div>
+    <div style="font-family:'Cinzel',serif;font-size:26px;font-weight:700;color:#ffffff;letter-spacing:3px;margin-bottom:4px;">OPENED <span style="color:#E8C87A;">SCRIPTURE</span></div>
+    <div style="font-family:'EB Garamond',serif;font-style:italic;font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px;">"All Scripture is breathed out by God." — 2 Timothy 3:16</div>
+    <div style="font-size:11px;color:rgba(255,255,255,0.22);font-family:'EB Garamond',serif;line-height:1.8;">
+      © 2026 Opened Scripture &nbsp;·&nbsp; All rights reserved<br>
+      You received this because you subscribed.<br>
+      <a href="#" style="color:rgba(255,255,255,0.38);text-decoration:underline;">Unsubscribe</a>
+    </div>
+  </div>
+
+</div>`;
+  }
+
+  function copyHTML() {
+    generatePreview();
+    const rawContent = document.getElementById('preview-output').innerHTML;
+    const fullHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Opened Scripture — Issue ${val('issue-num') || '1'}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+body { margin:0; padding: 32px 16px 64px; background:#EDEBE8; }
+</style>
+</head>
+<body>
+${rawContent}
+</body>
+</html>`;
+
+    document.getElementById('html-output').value = fullHTML;
+    document.getElementById('html-modal').classList.add('open');
+  }
+
+  function doCopy() {
+    const ta = document.getElementById('html-output');
+    ta.select();
+    document.execCommand('copy');
+    const btn = event.target;
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy to Clipboard', 2000);
+  }
+
+  function closeModal() {
+    document.getElementById('html-modal').classList.remove('open');
+  }
+</script>
+</body>
+</html>
